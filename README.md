@@ -80,13 +80,7 @@ Secure-Cloud-Box
 
 1️⃣ Configure Environment
 
-```
-export PROJECT=securebox-8595
-export GCS_BUCKET=securebox-keshav-demo-001
-export KMS_KEY_NAME=projects/$PROJECT/locations/global/keyRings/securebox-ring/cryptoKeys/securebox-key
-export GOOGLE_APPLICATION_CREDENTIALS=$HOME/securebox-sa.json
-export JWT_SECRET=supersecret-dev
-```
+export Your Credentials and Requirements
 
 Windows:
 
@@ -209,8 +203,5 @@ Even if a **supercomputer** checks
 
 Keshav Kapoor 
 
-
-
-## 📜 License
 
 MIT License – Free to modify & use.
