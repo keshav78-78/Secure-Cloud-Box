@@ -203,6 +203,6 @@ Even if a **supercomputer** checks
 
 Keshav Kapoor 
 
-LICENCE
+LICENSE
 
 MIT License – Free to modify & use.
