@@ -26,7 +26,7 @@ import (
 var server = env("SERVER_URL", "http://localhost:8080")
 var bearer string
 
-// ---------------- Path Helpers ----------------
+//Path Helpers
 
 func normalizePath(p string) string {
 	p = strings.TrimSpace(p)
@@ -49,35 +49,30 @@ func makeObjectName(localPath string) string {
 	return "user1/" + s + ".enc"
 }
 
-// ---------------- UI Styles ----------------
+// ui styles
 
 var (
-	// Top title bar
 	titleStyle = lipgloss.NewStyle().
 			Bold(true).
 			Padding(0, 4).
-			Background(lipgloss.Color("#020617")). // very dark
-			Foreground(lipgloss.Color("#E5E7EB")). // light gray
+			Background(lipgloss.Color("#020617")).
+			Foreground(lipgloss.Color("#E5E7EB")).
 			BorderStyle(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color("#38BDF8")).
 			MarginBottom(1)
 
-	// "Server: ... • Bucket: ..." line
 	headerMetaStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("#9CA3AF")).
 			Italic(true)
 
-	// Section headings: "Actions", "Upload File" etc.
 	sectionStyle = lipgloss.NewStyle().
 			Bold(true).
 			Foreground(lipgloss.Color("#A6E3A1"))
 
-	// Labels above inputs
 	labelStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("#94A3B8")).
 			MarginBottom(0)
 
-	// Generic help text at bottom
 	helpStyle = lipgloss.NewStyle().
 			Faint(true).
 			Italic(true).
@@ -91,7 +86,6 @@ var (
 			Foreground(lipgloss.Color("#4ADE80")).
 			Bold(true)
 
-	// Menu items
 	menuItemStyle = lipgloss.NewStyle().
 			Padding(0, 1).
 			Foreground(lipgloss.Color("#E5E7EB"))
@@ -102,14 +96,12 @@ var (
 				Background(lipgloss.Color("#38BDF8")).
 				Bold(true)
 
-	// Progress box around forms / progress
 	boxStyle = lipgloss.NewStyle().
 			BorderStyle(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color("#1F2937")).
 			Padding(1, 2).
 			MarginTop(1)
 
-	// Progress bar container
 	progressBox = lipgloss.NewStyle().
 			BorderStyle(lipgloss.NormalBorder()).
 			BorderForeground(lipgloss.Color("#374151")).
@@ -117,7 +109,7 @@ var (
 			MarginTop(1)
 )
 
-// ---------------- Model ----------------
+//Model
 
 type phase int
 
@@ -146,10 +138,10 @@ type model struct {
 	completed int64
 	doneMsg   string
 
-	width int // terminal width for centering header
+	width int
 }
 
-// ---------------- Init ----------------
+// Init
 
 func initialModel() model {
 	ti1 := textinput.New()
@@ -185,12 +177,12 @@ type workDoneMsg struct {
 	err error
 }
 
-// ---------------- Update ----------------
+// Update
 
 func (m model) Init() tea.Cmd { return nil }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	// capture terminal width for centering header
+
 	if wm, ok := msg.(tea.WindowSizeMsg); ok {
 		m.width = wm.Width
 		return m, nil
@@ -350,7 +342,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-// ---------------- View ----------------
+// View
 
 func (m model) View() string {
 	// Title text
@@ -441,21 +433,18 @@ func (m model) View() string {
 }
 
 func menuLine(_ int, selected bool, text string) string {
-	// optional: agar number bhi dikhana hai to use:
-	// label := fmt.Sprintf("%d.", i+1)
 
 	if selected {
-		// selected: arrow + highlight + bold (selected style)
+
 		line := fmt.Sprintf("> %s", text)
 		return menuItemSelectedStyle.Render(line)
 	}
 
-	// normal: sirf indent, no arrow
 	line := fmt.Sprintf("  %s", text)
 	return menuItemStyle.Render(line)
 }
 
-// ---------------- Work Commands ----------------
+// Work Commands
 
 func (m model) doUpload(path, object string) tea.Cmd {
 	return func() tea.Msg {
@@ -582,7 +571,7 @@ func (m model) doDownload(object, outPath string) tea.Cmd {
 	}
 }
 
-// ---------------- Auth & Request Helpers ----------------
+// Auth & Request Helpers
 
 func loginOnce() error {
 	if bearer != "" {
@@ -683,7 +672,7 @@ func postJSONNoAuth(path string, body any, out any) error {
 	return json.NewDecoder(res.Body).Decode(out)
 }
 
-// ---------------- Misc & main ----------------
+// Misc & main
 
 func env(k, def string) string {
 	if v := os.Getenv(k); v != "" {

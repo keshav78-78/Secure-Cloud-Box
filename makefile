@@ -68,7 +68,7 @@ dev-bg:
 	nohup sh -c 'go run ./cmd/securebox-tui > tui.log 2>&1 &' ; \
 	echo "Started (logs: server.log, tui.log)"
 
-# For Windows (cmd.exe)
+
 dev-win:
 	@echo "Starting server + TUI in separate Windows terminals..."
 	@cmd.exe /C start "SecureBox Server" cmd /K "cd /d $(CURDIR) && go run .\cmd\securebox-server"

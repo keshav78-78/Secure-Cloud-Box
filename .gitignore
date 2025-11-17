@@ -7,6 +7,12 @@ securebox-sa.json
 service-account.json
 credentials.json
 
+decrypt-files/
+download/
+uploads/
+*.txt
+
+
 securebox.db
 *.sqlite
 *.db
