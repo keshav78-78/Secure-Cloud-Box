@@ -114,7 +114,7 @@ Upload / Download securely.
 
 ---
 
-🧪 Demo Commands (For Professors)
+🧪 Demo Commands 
 
 Show encrypted files in cloud
 
